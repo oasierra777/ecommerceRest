@@ -5,6 +5,8 @@ from django.contrib.auth.models import BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 
+from apps.cart.models import Cart
+
 class userAccountManager(BaseUserManager):
     
     def create_user(self, email, password=None, **extra_fields):
@@ -16,6 +18,9 @@ class userAccountManager(BaseUserManager):
         
         user.set_password(password)
         user.save()
+        
+        shopping_cart = Cart.objects.create(user=user)
+        shopping_cart.save()
         
         return user
     
