@@ -26,7 +26,7 @@ DJANGO_APPS = [
 ]
 
 PROJECT_APPS = [
-    
+    'apps.user',
 ]
 
 ECOMMERCE_APPS = [
@@ -171,3 +171,16 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+AUTH_USER_MODEL = "user.UserAccount"
+
+EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
+
+if not DEBUG:
+    DEFAULT_FROM_EMAIL = "Desarrollo de Software <oscarpruebadjango@gmail.com>"
+    EMAIL_BACKEND = ('EMAIL_BACKEND')
+    EMAIL_HOST = env('EMAIL_HOST')
+    EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+    EMAIL_PORT = env('EMAIL_PORT')
+    EMAIL_USE_TLS = env('EMAIL_USE_TLS')
